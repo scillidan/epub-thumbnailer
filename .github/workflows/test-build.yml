@@ -27,15 +27,7 @@ jobs:
         $env:PYTHONIOENCODING = "utf-8"
 
     - name: Build executable with PyInstaller
-      run: |
-        pyinstaller ^
-          src/epub-thumbnailer.py ^
-          --onefile ^
-          --name=epub-thumbnailer ^
-          --console ^
-          --collect-all=PIL ^
-          --clean
-        echo "Build completed"
+      run: pyinstaller src/epub-thumbnailer.py --onefile --name=epub-thumbnailer --console --collect-all=PIL --clean
 
     - name: Test executable
       run: |
