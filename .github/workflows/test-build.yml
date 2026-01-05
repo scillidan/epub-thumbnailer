@@ -29,17 +29,7 @@ jobs:
     - name: Build executable with PyInstaller
       run: pyinstaller src/epub-thumbnailer.py --onefile --name=epub-thumbnailer --console --collect-all=PIL --clean
 
-    - name: Test executable
-      run: |
-        .\dist\epub-thumbnailer.exe --help
-        echo "Build test passed!"
-
-    - name: Basic functionality test
-      run: |
-        # Test with a non-existent file to check error handling
-        .\dist\epub-thumbnailer.exe "nonexistent.epub" test.png 100 || echo "Expected error for missing file"
-
-    - name: Real EPUB test (if test file exists)
+    - name: Test
       run: |
         Invoke-WebRequest -Uri "https://www.gutenberg.org/ebooks/11.epub3.images" -OutFile alice_in_wonderland.epub
         \dist\epub-thumbnailer.exe "alice_in_wonderland.epub" cover.png 256
