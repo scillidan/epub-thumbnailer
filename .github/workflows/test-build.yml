@@ -16,6 +16,12 @@ jobs:
       with:
         python-version: '3.14'
 
+    - name: Set UTF-8 encoding for Windows
+      run: |
+        [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+        $env:PYTHONIOENCODING = "utf-8"
+        chcp 65001
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
