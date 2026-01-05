@@ -32,10 +32,10 @@ def build_final():
     result = subprocess.run(cmd, capture_output=True, text=True)
 
     if result.returncode == 0:
-        print("✓ Build successful!")
+        print("OK Build successful!")
         return True
     else:
-        print("✗ Build failed!")
+        print("FAIL Build failed!")
         print("STDERR:", result.stderr)
         return False
 
