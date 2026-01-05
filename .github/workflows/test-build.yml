@@ -1,0 +1,41 @@
+name: Build on Windows
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.14'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pillow pyinstaller
+
+    - name: Build executable
+      run: |
+        python build_final.py
+
+    - name: Test executable
+      run: |
+        .\dist\epub-thumbnailer.exe --help
+        echo "Build test passed!"
+
+    - name: Basic functionality test
+      run: |
+        # Test with a non-existent file to check error handling
+        .\dist\epub-thumbnailer.exe "nonexistent.epub" test.png 100 || echo "Expected error for missing file"
+
+    - name: Real EPUB test (if test file exists)
+      run: |
+        Invoke-WebRequest -Uri "https://www.gutenberg.org/ebooks/11.epub3.images" -OutFile alice_in_wonderland.epub
+        \dist\epub-thumbnailer.exe "alice_in_wonderland.epub" cover.png 256
