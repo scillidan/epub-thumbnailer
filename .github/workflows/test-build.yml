@@ -32,4 +32,4 @@ jobs:
     - name: Test
       run: |
         Invoke-WebRequest -Uri "https://www.gutenberg.org/ebooks/11.epub3.images" -OutFile alice_in_wonderland.epub
-        \dist\epub-thumbnailer.exe "alice_in_wonderland.epub" cover.png 256
+        dist\epub-thumbnailer.exe "alice_in_wonderland.epub" cover.png 256
