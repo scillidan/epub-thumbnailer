@@ -1,4 +1,4 @@
-name: Build on Windows
+name: Test building on Windows
 
 on:
   workflow_dispatch:
@@ -23,7 +23,7 @@ jobs:
 
     - name: Build executable
       run: |
-        python build_final.py
+        python build.py
 
     - name: Test executable
       run: |
